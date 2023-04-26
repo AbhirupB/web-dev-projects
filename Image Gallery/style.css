@@ -1,0 +1,108 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#wrapper{
+    height: 100vh;      /*height of the content = 100% of viewport available*/
+    /*50vh means 1/2 the sie of viewport available. eg: available viewport is 1000px, height of content = 500px.
+    calc(100%-100px) means iff your screen height is 1000px, 
+                     your element height will be equal to 900px (100% of 1000px and minus 100px).   */
+
+    overflow-x: hidden; /*no scrolling horizontally*/
+    overflow-y: auto;   /*scrolling horizontally*/
+}
+
+.container{
+    height: 100%;
+    max-width: 1200px;  /*fill content only upto 1200px; overflows more than that.*/
+    
+    /* The margin property is shorthand for:
+
+        margin-top
+        margin-right
+        margin-bottom
+        margin-left
+
+        So how come only two values?
+        Well, you can express margin with four values like this:
+        margin: 10px, 20px, 15px, 5px;
+        which would mean 10px top, 20px right, 15px bottom, 5px left
+
+        Likewise you can also express with two values like this:
+        margin: 20px 10px;
+        This would give you a margin 20px top and bottom and 10px left and right. */
+
+    margin: 0 auto; /*place content at centre*/
+    /*  margin-top:0;
+        margin-bottom:0;
+        margin-left:auto;
+        margin-right:auto; */
+
+    padding: 20px;  /*space between border and content */ 
+}
+
+.container h1{  /*particular class=container and its h1 is being addressed to */
+    margin: 20px 0;
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.gallery{
+    display: flex;
+    flex-wrap: wrap;    /*so that images do not appear on single row*/
+    justify-content: space-around;
+}
+
+.card{
+    width: 32%; /*out of 100% screen size, 32% for each image card and rest for spaces between */
+    position: relative; /* we need text (caption) to overlap over each card so we will keep position of text as ABSOLUTE
+                            and its parent element's position as RELATIVE.  
+                            PARENT element of the element to be OVERLAPPED must be RELATIVE. */
+    margin-bottom: 20px;
+    border-radius: 10px;    /*rounded corners of cards*/
+    overflow: hidden;
+}
+
+.card img{  /*img of that particular class=card*/
+    width: 100%;    /*100% of its parent element that is class=card.*/
+    filter: grayscale(100%);    /* B&W images before HOVERING */
+    box-shadow: 0 0 20px #333;
+    object-fit: cover;
+    height: 100%;   /*100% of parent element that is class=card; without this img will have sharp corners. */
+}
+
+/* when you hover */
+.card:hover{
+    transform: scale(1.03); /* increase card size */
+    filter: drop-shadow(0 0 10 #333);   /*shadow on govering */
+    transition: 0.3s;   /*smoothening of transition as card size increases on hovering */
+}
+
+/* when you stop hovering */
+.card:hover img{
+    filter: grayscale(0%);
+}
+
+.card figcaption{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 25px;
+    width: 100%;    /*of parent class=card*/
+    height: 20%;    /*of parent class=card*/
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    opacity: 0; /* show text ONLY on hovering*/
+    border-radius: 0 0 10px 10px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);  
+    transition: 0.3s;
+  }
+  
+  .card:hover figcaption {
+    opacity: 1;
+    transform: scale(1.03);
+  }  
