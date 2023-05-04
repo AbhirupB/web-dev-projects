@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ #wrapper{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+ }
+ 
+.pink-btn{
+    background-color: #fd10b2;
+    padding: 0.8rem 2.3rem;
+    color: white;
+    font-size: 18px;
+    box-shadow: 5px 5px 8px 0px rgb(206, 189, 189); 
+    /*width height transparency spread color*/
+
+    /*as this is the nearest position ancestor*/
+    position: relative;
+        
+    /*to show the Hire Me text*/
+    z-index: 0;
+
+} 
+
+/*'before' means before any CSS of .pink-btn is applied.*/
+.pink-btn::before{
+    content:"";
+    background-color:black;
+
+    /*we need to fill the entire pink-btn div with black.
+      implies, we need to overlap the colors, pink and black.
+      implies, keep the position of black as absolute.
+      implies, parent element (nearest position ancestor) must be non-static=>relative.*/
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    /*hides the black in the beginning*/
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: 1s;
+
+    /*if this is not done, black overlays the Hire Me text*/
+    z-index: -1;
+
+}
+
+.pink-btn:hover::before{
+    transform: scaleX(1);
+}
